@@ -32,7 +32,7 @@ function App() {
     if (!isNaN(expenseValue)) {
       setCount(count + expenseValue);
       setFinalAmount(finalAmount - expenseValue);
-      setExpenseHistory([...expenseHistory, { amount: expenseValue, description: expenseDescription }]);
+      setExpenseHistory([...expenseHistory, { amount: expenseValue, description: expenseDescription ,date: new Date().toLocaleString() }]);
       setExpense('');
       setExpenseDescription('');
     }
@@ -42,7 +42,7 @@ function App() {
     const incomeValue = parseFloat(income);
     if (!isNaN(incomeValue)) {
       setFinalAmount(finalAmount + incomeValue);
-      setIncomeHistory([...incomeHistory, { amount: incomeValue, description: incomeDescription }]);
+      setIncomeHistory([...incomeHistory, { amount: incomeValue, description: incomeDescription ,date: new Date().toLocaleString()}]);
       setIncome('');
       setIncomeDescription('');
     }
@@ -59,7 +59,7 @@ function App() {
       <ul>
         {expenseHistory.map((expense, index) => (
           <li key={index}>
-            Amount: {expense.amount} - Description: {expense.description}
+            Amount: {expense.amount} - Description: {expense.description} - Date:{expense.date}
           </li>
         ))}
       </ul>
@@ -68,7 +68,7 @@ function App() {
       <ul>
         {incomeHistory.map((income, index) => (
           <li key={index}>
-            Amount: {income.amount} - Description: {income.description}
+            Amount: {income.amount} - Description: {income.description -Date}: {income.date}
           </li>
         ))}
       </ul>
