@@ -1,6 +1,7 @@
 const express=require ('express');
 const mongoose=require('mongoose');
 const cors=require('cors');
+require('dotenv').config();
 
 const app=express();
 app.use(cors());
@@ -8,7 +9,7 @@ app.use(express.json());
 
 //{useNewUrlParser: true, useUnifiedTopology: true }
 //connect with MongoDB
-mongoose.connect('mongodb+srv://developersourav135:44281219@cluster0.cim5m44.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/expense_traker',)
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB connected successfully"))
 .catch(err => console.error("MongoDB connection error:", err));
 
@@ -17,13 +18,13 @@ mongoose.connect('mongodb+srv://developersourav135:44281219@cluster0.cim5m44.mon
 const expenseSchema = new mongoose.Schema({
     amount:Number,
     description:String,
-    data:String
+    date:String
 });
 
 const incomeSchema = new mongoose.Schema({
     amount:Number,
     description:String,
-    data:String
+    date:String
 })
 
 const Expense=mongoose.model('Expense',expenseSchema);
@@ -60,9 +61,10 @@ app.get('/incomes',async(req,res)=>{
     res.send(incomes);
 })
 
-app.listen(5000,(error)=>{
+const port=process.env.PORT||5000;
+app.listen(port,(error)=>{
     if(!error){
-        console.log(`Server is running  5000`);
+        console.log(`Server is running on port ${port}`);
     }else{
         console.log("Error :"+error)
     }
