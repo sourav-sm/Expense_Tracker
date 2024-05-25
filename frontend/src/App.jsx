@@ -15,10 +15,10 @@ function App() {
   useEffect(() => {
     // Fetch expenses and income from the backend
     const fetchExpensesAndIncome = async () => {
-      const expensesResponse = await axios.get('http://localhost:5000/expenses');
+      const expensesResponse = await axios.get('https://expense-tracker-jtiw.onrender.com/expenses');
       setExpenseHistory(expensesResponse.data);
 
-      const incomeResponse = await axios.get('http://localhost:5000/incomes');
+      const incomeResponse = await axios.get('https://expense-tracker-jtiw.onrender.com/incomes');
       setIncomeHistory(incomeResponse.data);
       
       // Calculate the final amount
@@ -50,7 +50,7 @@ function App() {
     const expenseValue = parseFloat(expense);
     if (!isNaN(expenseValue)) {
       const newExpense = { amount: expenseValue, description: expenseDescription, date: new Date().toLocaleString() };
-      await axios.post('http://localhost:5000/expenses', newExpense);
+      await axios.post('https://expense-tracker-jtiw.onrender.com/expenses', newExpense);
       setExpenseHistory([...expenseHistory, newExpense]);
       setFinalAmount(finalAmount - expenseValue);
       setExpense('');
@@ -62,7 +62,7 @@ function App() {
     const incomeValue = parseFloat(income);
     if (!isNaN(incomeValue)) {
       const newIncome = { amount: incomeValue, description: incomeDescription, date: new Date().toLocaleString() };
-      await axios.post('http://localhost:5000/incomes', newIncome);
+      await axios.post('https://expense-tracker-jtiw.onrender.com/incomes', newIncome);
       setIncomeHistory([...incomeHistory, newIncome]);
       setFinalAmount(finalAmount + incomeValue);
       setIncome('');
